@@ -1,40 +1,14 @@
-$(document).ready(function() {
-    var submitIcon = $('.searchbar-icon');
-    var inputBox = $('.searchbar-input');
-    var searchbar = $('.searchbar');
-    var isOpen = false;
-    submitIcon.click(function() {
-        if (isOpen == false) {
-            searchbar.addClass('searchbar-open');
-            inputBox.focus();
-            isOpen = true;
+document.addEventListener("DOMContentLoaded", function(){
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 50) {
+          document.getElementById('navbar_top').classList.add('fixed-top');
+          // add padding top to show content behind navbar
+          navbar_height = document.querySelector('.navbar').offsetHeight;
+          document.body.style.paddingTop = navbar_height + 'px';
         } else {
-            searchbar.removeClass('searchbar-open');
-            inputBox.focusout();
-            isOpen = false;
-        }
+          document.getElementById('navbar_top').classList.remove('fixed-top');
+           // remove padding top from body
+          document.body.style.paddingTop = '0';
+        } 
     });
-    submitIcon.mouseup(function() {
-        return false;
-    });
-    searchbar.mouseup(function() {
-        return false;
-    });
-    $(document).mouseup(function() {
-        if (isOpen == true) {
-            $('.searchbar-icon').css('display', 'block');
-            submitIcon.click();
-        }
-    });
-});
-
-function buttonUp() {
-    var inputVal = $('.searchbar-input').val();
-    inputVal = $.trim(inputVal).length;
-    if (inputVal !== 0) {
-        $('.searchbar-icon').css('display', 'none');
-    } else {
-        $('.searchbar-input').val('');
-        $('.searchbar-icon').css('display', 'block');
-    }
-}
+  }); 
